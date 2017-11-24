@@ -22,7 +22,17 @@ public class DatabaseAccess {
      * @param context
      */
     private DatabaseAccess(Context context) {
-        this.openHelper = new DatabaseOpenHelper(context);
+        this.openHelper = new SQLiteOpenHelper(context) {
+            @Override
+            public void onCreate(SQLiteDatabase sqLiteDatabase) {
+                
+            }
+
+            @Override
+            public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+
+            }
+        };
     }
 
     /**
