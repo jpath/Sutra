@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +44,7 @@ public class SutraFragment extends Fragment {
      */
     // TODO: Rename and change types and number of parameters
     public static SutraFragment newInstance(String param1, String param2) {
+        Log.d("Is this", "thing on?");
         SutraFragment fragment = new SutraFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);

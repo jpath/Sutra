@@ -16,16 +16,19 @@ public class DatabaseAccess {
     private SQLiteDatabase database;
     private static DatabaseAccess instance;
 
+    private static final String DATABASE_NAME = "sutra.db";
+    private static final int DATABASE_VERSION = 1;
+
     /**
      * Private constructor to aboid object creation from outside classes.
      *
      * @param context
      */
     private DatabaseAccess(Context context) {
-        this.openHelper = new SQLiteOpenHelper(context) {
+        this.openHelper = new SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
             @Override
             public void onCreate(SQLiteDatabase sqLiteDatabase) {
-                
+
             }
 
             @Override
@@ -70,6 +73,7 @@ public class DatabaseAccess {
      * @return a List of sutras
      */
     public List<String> getSutras() {
+        this.open();
         List<String> list = new ArrayList<>();
         /* TODO: alternate readings, (eg. tatra added)
         * table alternate_readings, with foreign key sutra_id */
@@ -80,18 +84,20 @@ public class DatabaseAccess {
             cursor.moveToNext();
         }
         cursor.close();
-
+        this.close();
         return list;
     }
 
     public int getChapterStartDbId(int chapterNum) {
         int startId;
         String query;
-        
+        this.open();
         query = String.format("SELECT _id FROM sutras WHERE pada = %d LIMIT 1", chapterNum);
         Cursor cursor = database.rawQuery(query, null);
         cursor.moveToFirst();
         startId = cursor.getInt(0);
+        cursor.close();
+        this.close();
         return startId;
     }
 }

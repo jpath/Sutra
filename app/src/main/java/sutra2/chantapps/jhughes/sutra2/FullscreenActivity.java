@@ -1,10 +1,10 @@
 package sutra2.chantapps.jhughes.sutra2;
 
 import android.annotation.SuppressLint;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -32,6 +32,7 @@ public class FullscreenActivity extends AppCompatActivity {
     private static final int UI_ANIMATION_DELAY = 300;
     private final Handler mHideHandler = new Handler();
     private View mFragmentView;
+    private ScreenSlidePagerActivity mScreenSlidePagerActivity;
     private final Runnable mHidePart2Runnable = new Runnable() {
         @SuppressLint("InlinedApi")
         @Override
@@ -89,13 +90,15 @@ public class FullscreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_fullscreen);
         mVisible = true;
         mFragmentView = findViewById(R.id.pager);
-
+        mScreenSlidePagerActivity = new ScreenSlidePagerActivity();
+        if(null != savedInstanceState)
+            mScreenSlidePagerActivity.onCreate(savedInstanceState);
         // Set up the user interaction to manually show or hide the system UI.
         mFragmentView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 toggle();
-            }
+           }
         });
     }
 
