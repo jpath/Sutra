@@ -1,10 +1,16 @@
 package sutra2.chantapps.jhughes.sutra2;
 
 import android.annotation.SuppressLint;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -13,6 +19,9 @@ import android.view.View;
  * status bar and navigation/system bar) with user interaction.
  */
 public class FullscreenActivity extends AppCompatActivity {
+
+    private ScreenSlideActivity mSutraActivity;
+
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -24,6 +33,16 @@ public class FullscreenActivity extends AppCompatActivity {
      * user interaction before hiding the system UI.
      */
     private static final int AUTO_HIDE_DELAY_MILLIS = 3000;
+    /**
+     * The pager widget, which handles animation and allows swiping horizontally to access previous
+     * and next wizard steps.
+     */
+    private ViewPager mPager;
+
+    /**
+     * The pager adapter, which provides the pages to the view pager widget.
+     */
+    private PagerAdapter mPagerAdapter;
 
     /**
      * Some older devices needs a small delay between UI widget updates
@@ -31,7 +50,8 @@ public class FullscreenActivity extends AppCompatActivity {
      */
     private static final int UI_ANIMATION_DELAY = 300;
     private final Handler mHideHandler = new Handler();
-    private View mContentView;
+    //private View mContentView;
+    private ViewPager mContentView;
     private final Runnable mHidePart2Runnable = new Runnable() {
         @SuppressLint("InlinedApi")
         @Override
@@ -91,13 +111,17 @@ public class FullscreenActivity extends AppCompatActivity {
 
         mVisible = true;
         mControlsView = findViewById(R.id.fullscreen_content_controls);
-        mContentView = findViewById(R.id.fullscreen_content);
-
+        //mContentView = findViewById(R.id.fullscreen_content);
+        // Instantiate a ViewPager and a PagerAdapter.
+        mContentView= (ViewPager) findViewById(R.id.fullscreen_content);
+        mPagerAdapter = new FullscreenActivity.ScreenSlidePagerAdapter(getSupportFragmentManager());
+        mContentView.setAdapter(mPagerAdapter);
 
         // Set up the user interaction to manually show or hide the system UI.
         mContentView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d("are we", "HERE????");
                 toggle();
             }
         });
@@ -120,8 +144,10 @@ public class FullscreenActivity extends AppCompatActivity {
 
     private void toggle() {
         if (mVisible) {
+            Log.d("are we", "HERE????hide");
             hide();
         } else {
+            Log.d("are we", "HERE????show");
             show();
         }
     }
@@ -159,5 +185,26 @@ public class FullscreenActivity extends AppCompatActivity {
     private void delayedHide(int delayMillis) {
         mHideHandler.removeCallbacks(mHideRunnable);
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
+    }
+
+    /**
+     * A simple pager adapter that represents 5 {@link ScreenSlidePageFragment} objects, in
+     * sequence.
+     */
+    private class ScreenSlidePagerAdapter extends FragmentPagerAdapter {
+        // TODO: Pass the sutras list to this constructor?
+        public ScreenSlidePagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return ScreenSlidePageFragment.create(position);
+        }
+
+        @Override
+        public int getCount() {
+            return 5;
+        }
     }
 }
