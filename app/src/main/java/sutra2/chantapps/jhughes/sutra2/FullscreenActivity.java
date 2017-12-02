@@ -10,7 +10,6 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -19,8 +18,6 @@ import android.view.View;
  * status bar and navigation/system bar) with user interaction.
  */
 public class FullscreenActivity extends AppCompatActivity {
-
-    private ScreenSlideActivity mSutraActivity;
 
     /**
      * Whether or not the system UI should be auto-hidden after
@@ -50,8 +47,8 @@ public class FullscreenActivity extends AppCompatActivity {
      */
     private static final int UI_ANIMATION_DELAY = 300;
     private final Handler mHideHandler = new Handler();
-    //private View mContentView;
-    private ViewPager mContentView;
+    private View mContentView;
+    //private ViewPager mContentView;
     private final Runnable mHidePart2Runnable = new Runnable() {
         @SuppressLint("InlinedApi")
         @Override
@@ -111,20 +108,12 @@ public class FullscreenActivity extends AppCompatActivity {
 
         mVisible = true;
         mControlsView = findViewById(R.id.fullscreen_content_controls);
-        //mContentView = findViewById(R.id.fullscreen_content);
-        // Instantiate a ViewPager and a PagerAdapter.
-        mContentView= (ViewPager) findViewById(R.id.fullscreen_content);
-        mPagerAdapter = new FullscreenActivity.ScreenSlidePagerAdapter(getSupportFragmentManager());
-        mContentView.setAdapter(mPagerAdapter);
+        mContentView = findViewById(R.id.fullscreen_content);
 
-        // Set up the user interaction to manually show or hide the system UI.
-        mContentView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("are we", "HERE????");
-                toggle();
-            }
-        });
+        // Instantiate a ViewPager and a PagerAdapter.
+        mPager= (ViewPager) findViewById(R.id.pager);
+        mPagerAdapter = new FullscreenActivity.ScreenSlidePagerAdapter(getSupportFragmentManager());
+        mPager.setAdapter(mPagerAdapter);
 
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
@@ -142,12 +131,14 @@ public class FullscreenActivity extends AppCompatActivity {
         delayedHide(100);
     }
 
+    /* Cannot call toggle() directly */
+    protected void myToggle(View view){
+        toggle();
+    }
     private void toggle() {
         if (mVisible) {
-            Log.d("are we", "HERE????hide");
             hide();
         } else {
-            Log.d("are we", "HERE????show");
             show();
         }
     }
