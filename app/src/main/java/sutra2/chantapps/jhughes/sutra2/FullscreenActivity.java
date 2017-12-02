@@ -3,6 +3,11 @@ package sutra2.chantapps.jhughes.sutra2;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
@@ -13,6 +18,7 @@ import android.view.View;
  * status bar and navigation/system bar) with user interaction.
  */
 public class FullscreenActivity extends AppCompatActivity {
+
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -24,6 +30,16 @@ public class FullscreenActivity extends AppCompatActivity {
      * user interaction before hiding the system UI.
      */
     private static final int AUTO_HIDE_DELAY_MILLIS = 3000;
+    /**
+     * The pager widget, which handles animation and allows swiping horizontally to access previous
+     * and next wizard steps.
+     */
+    private ViewPager mPager;
+
+    /**
+     * The pager adapter, which provides the pages to the view pager widget.
+     */
+    private PagerAdapter mPagerAdapter;
 
     /**
      * Some older devices needs a small delay between UI widget updates
@@ -31,8 +47,8 @@ public class FullscreenActivity extends AppCompatActivity {
      */
     private static final int UI_ANIMATION_DELAY = 300;
     private final Handler mHideHandler = new Handler();
-    private View mFragmentView;
-    private ScreenSlidePagerActivity mScreenSlidePagerActivity;
+    private View mContentView;
+    //private ViewPager mContentView;
     private final Runnable mHidePart2Runnable = new Runnable() {
         @SuppressLint("InlinedApi")
         @Override
@@ -42,7 +58,7 @@ public class FullscreenActivity extends AppCompatActivity {
             // Note that some of these constants are new as of API 16 (Jelly Bean)
             // and API 19 (KitKat). It is safe to use them, as they are inlined
             // at compile-time and do nothing on earlier devices.
-            mFragmentView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
+            mContentView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
                     | View.SYSTEM_UI_FLAG_FULLSCREEN
                     | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                     | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
@@ -89,17 +105,18 @@ public class FullscreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fullscreen);
         mVisible = true;
-        mFragmentView = findViewById(R.id.pager);
-        mScreenSlidePagerActivity = new ScreenSlidePagerActivity();
-        if(null != savedInstanceState)
-            mScreenSlidePagerActivity.onCreate(savedInstanceState);
-        // Set up the user interaction to manually show or hide the system UI.
-        mFragmentView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                toggle();
-           }
-        });
+        mControlsView = findViewById(R.id.fullscreen_content_controls);
+        mContentView = findViewById(R.id.fullscreen_content);
+
+        // Instantiate a ViewPager and a PagerAdapter.
+        mPager= (ViewPager) findViewById(R.id.pager);
+        mPagerAdapter = new FullscreenActivity.ScreenSlidePagerAdapter(getSupportFragmentManager());
+        mPager.setAdapter(mPagerAdapter);
+
+        // Upon interacting with UI controls, delay any scheduled hide()
+        // operations to prevent the jarring behavior of controls going away
+        // while interacting with the UI.
+        findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
     }
 
     @Override
@@ -112,6 +129,10 @@ public class FullscreenActivity extends AppCompatActivity {
         delayedHide(100);
     }
 
+    /* Cannot call toggle() directly */
+    protected void myToggle(View view){
+        toggle();
+    }
     private void toggle() {
         if (mVisible) {
             hide();
@@ -126,7 +147,7 @@ public class FullscreenActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.hide();
         }
-        mFragmentView.setVisibility(View.GONE);
+        mContentView.setVisibility(View.GONE);
         mVisible = false;
 
         // Schedule a runnable to remove the status and navigation bar after a delay
@@ -137,7 +158,7 @@ public class FullscreenActivity extends AppCompatActivity {
     @SuppressLint("InlinedApi")
     private void show() {
         // Show the system bar
-        mFragmentView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        mContentView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
         mVisible = true;
 
@@ -153,5 +174,26 @@ public class FullscreenActivity extends AppCompatActivity {
     private void delayedHide(int delayMillis) {
         mHideHandler.removeCallbacks(mHideRunnable);
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
+    }
+
+    /**
+     * A simple pager adapter that represents 5 {@link ScreenSlidePageFragment} objects, in
+     * sequence.
+     */
+    private class ScreenSlidePagerAdapter extends FragmentPagerAdapter {
+        // TODO: Pass the sutras list to this constructor?
+        public ScreenSlidePagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return ScreenSlidePageFragment.create(position);
+        }
+
+        @Override
+        public int getCount() {
+            return 5;
+        }
     }
 }
