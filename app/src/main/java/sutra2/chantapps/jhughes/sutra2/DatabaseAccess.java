@@ -9,7 +9,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class DatabaseAccess {
     private SQLiteOpenHelper openHelper;
@@ -67,26 +66,32 @@ public class DatabaseAccess {
         }
     }
 
-    /**
+/**
      * Read all quotes from the database.
      *
      * @return a List of sutras
      */
-    public List<String> getSutras() {
+   public ArrayList<Sutra> getSutras() {
         this.open();
-        List<String> list = new ArrayList<>();
+        ArrayList<Sutra> list = new ArrayList<>();
         /* TODO: alternate readings, (eg. tatra added)
-        * table alternate_readings, with foreign key sutra_id */
-        Cursor cursor = database.rawQuery("SELECT phonetic FROM sutras", null);
+       * table alternate_readings, with foreign key sutra_id */
+        Cursor cursor = database.rawQuery("SELECT _id, phonetic, devanagari, pada FROM sutras", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            list.add(cursor.getString(0));
+            int id = cursor.getInt(0);
+            String phonetic = cursor.getString(1);
+            String devanagari = cursor.getString(2);
+            int pada = cursor.getInt(3);
+            Sutra s = new Sutra(id, phonetic, devanagari, pada);
+            list.add(s);
             cursor.moveToNext();
         }
         cursor.close();
         this.close();
         return list;
-    }
+   }
+
 
     public int getChapterStartDbId(int chapterNum) {
         int startId;
