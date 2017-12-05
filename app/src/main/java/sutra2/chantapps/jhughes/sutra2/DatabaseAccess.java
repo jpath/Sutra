@@ -3,10 +3,12 @@ package sutra2.chantapps.jhughes.sutra2;
  * Created by jhughes on 02/10/16.
  */
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -16,6 +18,7 @@ public class DatabaseAccess {
     private static DatabaseAccess instance;
 
     private static final String DATABASE_NAME = "sutra.db";
+    private static final String DATABASE_PATH = "/data/user/0/sutra2.chantapps.jhughes.sutra2/databases/";
     private static final int DATABASE_VERSION = 1;
 
     /**
@@ -53,8 +56,12 @@ public class DatabaseAccess {
     /**
      * Open the database connection.
      */
+    @TargetApi(14)
     public void open() {
         this.database = openHelper.getWritableDatabase();
+        if(this.database.isOpen()) {
+            Log.d("opened", this.database.getPath());
+        }
     }
 
     /**
@@ -67,7 +74,7 @@ public class DatabaseAccess {
     }
 
 /**
-     * Read all quotes from the database.
+     * Read all sutras from the database.
      *
      * @return a List of sutras
      */
