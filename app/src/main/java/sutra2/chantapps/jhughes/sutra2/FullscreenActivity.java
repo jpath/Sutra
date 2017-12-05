@@ -42,6 +42,10 @@ public class FullscreenActivity extends AppCompatActivity {
     private PagerAdapter mPagerAdapter;
 
     /**
+     * The list of Sutra objects.
+     */
+    protected SutraList sutras;
+    /**
      * Some older devices needs a small delay between UI widget updates
      * and a change of the status and navigation bar.
      */
@@ -112,6 +116,9 @@ public class FullscreenActivity extends AppCompatActivity {
         mPager= (ViewPager) findViewById(R.id.pager);
         mPagerAdapter = new FullscreenActivity.ScreenSlidePagerAdapter(getSupportFragmentManager());
         mPager.setAdapter(mPagerAdapter);
+
+        // Get the list of sutras
+        sutras = SutraList.getInstance(this);
 
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
@@ -188,7 +195,8 @@ public class FullscreenActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return ScreenSlidePageFragment.create(position);
+
+            return ScreenSlidePageFragment.create(position, sutras.getSutra(position));
         }
 
         @Override
