@@ -12,14 +12,11 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
+
 public class DatabaseAccess {
     private SQLiteOpenHelper openHelper;
     private SQLiteDatabase database;
     private static DatabaseAccess instance;
-
-    private static final String DATABASE_NAME = "sutra.db";
-    private static final String DATABASE_PATH = "/data/user/0/sutra2.chantapps.jhughes.sutra2/databases/";
-    private static final int DATABASE_VERSION = 1;
 
     /**
      * Private constructor to aboid object creation from outside classes.
@@ -27,16 +24,7 @@ public class DatabaseAccess {
      * @param context
      */
     private DatabaseAccess(Context context) {
-        this.openHelper = new SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
-            @Override
-            public void onCreate(SQLiteDatabase sqLiteDatabase) {
-
-            }
-
-            @Override
-            public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
-            }
+        this.openHelper = new DatabaseOpenHelper(context) {
         };
     }
 
@@ -113,3 +101,4 @@ public class DatabaseAccess {
         return startId;
     }
 }
+

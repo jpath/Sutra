@@ -7,16 +7,16 @@ import java.util.ArrayList;
  */
 
 final class SutraList {
-    protected FullscreenActivity context;
+    private FullscreenActivity context;
     private ArrayList<Sutra> sutras;
     private static SutraList instance = null;
     private DatabaseAccess dbAccess;
-    protected SutraList(FullscreenActivity _context) {
+    private SutraList(FullscreenActivity _context) {
         context = _context;
-        ArrayList<Sutra> sutras = DatabaseAccess.getInstance(context).getSutras();
-        // Exists only to defeat instantiation.
+        sutras = DatabaseAccess.getInstance(context).getSutras();
     }
-    public static SutraList getInstance(FullscreenActivity context) {
+
+    protected static SutraList getInstance(FullscreenActivity context) {
         if(instance == null) {
            instance = new SutraList(context);
         }
@@ -25,11 +25,11 @@ final class SutraList {
 
 
     public ArrayList<Sutra> all() {
-        return sutras;
+      return sutras;
     }
 
-    public Sutra getSutra(int id) {
-        return sutras.get(id);
+    protected Sutra getSutra(int id) {
+      return sutras.get(id);
     }
 
 
