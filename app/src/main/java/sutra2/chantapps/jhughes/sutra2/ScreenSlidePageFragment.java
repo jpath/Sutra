@@ -18,7 +18,6 @@ package sutra2.chantapps.jhughes.sutra2;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +31,7 @@ public class ScreenSlidePageFragment extends Fragment {
      * The argument key for the page number this fragment represents.
      */
     public static final String ARG_PAGE = "page";
-
+    public static final String ARG_PHONETIC_SUTRA = "phonetic_sutra";
     /**
      * The fragment's page number, which is set to the argument value for {@link #ARG_PAGE}.
      */
@@ -43,9 +42,9 @@ public class ScreenSlidePageFragment extends Fragment {
      */
     public static ScreenSlidePageFragment create(int pageNumber, Sutra sutra) {
         ScreenSlidePageFragment fragment = new ScreenSlidePageFragment();
-        Log.d("phonetic?", sutra.getPhonetic());
         Bundle args = new Bundle();
         args.putInt(ARG_PAGE, pageNumber);
+        args.putString(ARG_PHONETIC_SUTRA, sutra.getPhonetic());
         fragment.setArguments(args);
         return fragment;
     }
@@ -62,13 +61,13 @@ public class ScreenSlidePageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+        String p = getArguments().getString(ARG_PHONETIC_SUTRA);
         // Inflate the layout containing a title and body text.
         ViewGroup rootView = (ViewGroup) inflater
                 .inflate(R.layout.fragment_screen_slide_page, container, false);
 
         // Set the title view to show the page number.
-        ((TextView) rootView.findViewById(android.R.id.text1)).setText(
-                getString(R.string.dummy_content, mPageNumber + 1));
+        ((TextView) rootView.findViewById(R.id.sutra)).setText(p);
 
         return rootView;
     }
