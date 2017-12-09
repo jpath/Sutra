@@ -9,12 +9,12 @@
             for system UI visibility. No apparent way to set those controls on
             the view inside the pager fragment. -->
     <TextView
-        android:onClick="myToggle"
-       android:id="@+id/fullscreen_content"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:gravity="center"
-       android:keepScreenOn="true"/>
+        android:id="@+id/fullscreen_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:keepScreenOn="true"
+        android:onClick="myToggle" />
 
 
    <!-- This FrameLayout insets its children based on system windows using
