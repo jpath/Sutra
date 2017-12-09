@@ -67,8 +67,10 @@ public class ScreenSlidePageFragment extends Fragment {
                 .inflate(R.layout.fragment_screen_slide_page, container, false);
 
         // Set the title view to show the page number.
-        ((TextView) rootView.findViewById(android.R.id.text1)).setText(
-                getString(R.string.dummy_content, mPageNumber + 1));
+        ((TextView) rootView.findViewById(R.id.sutra)).setText("somestring");
+
+        /*((TextView) rootView.findViewById(android.R.id.text1)).setText(
+                getString(R.string.dummy_content, mPageNumber + 1));*/
 
         return rootView;
     }
