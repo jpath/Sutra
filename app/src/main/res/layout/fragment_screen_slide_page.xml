@@ -20,13 +20,15 @@
     android:layout_height="match_parent">
 
 
-        <TextView android:id="@+id/sutra"
-            style="?android:textAppearanceMedium"
-            android:lineSpacingMultiplier="1.2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="32dp"
-            android:layout_marginTop="32dp"/>
+    <TextView
+        android:id="@+id/sutra"
+        style="?android:textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="32dp"
+        android:layout_marginTop="32dp"
+        android:lineSpacingMultiplier="1.2"
+        android:onClick="myToggle" />
     />
 
 

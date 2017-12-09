@@ -6,29 +6,28 @@
     tools:context="sutra2.chantapps.jhughes.sutra2.FullscreenActivity">
 
     <!-- Not replacing generated text view as it seems to be required
-        for system UI visibility. No apparent way to set those controls on
-        the view inside the pager fragment. -->
-
+            for system UI visibility. No apparent way to set those controls on
+            the view inside the pager fragment. -->
     <TextView
+        android:onClick="myToggle"
        android:id="@+id/fullscreen_content"
-
        android:layout_width="match_parent"
        android:layout_height="match_parent"
        android:gravity="center"
        android:keepScreenOn="true"/>
 
-    <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
 
    <!-- This FrameLayout insets its children based on system windows using
         android:fitsSystemWindows. -->
     <FrameLayout
-        android:onClick="myToggle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true">
+
+        <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
          <LinearLayout
              android:id="@+id/fullscreen_content_controls"
              style="?metaButtonBarStyle"
