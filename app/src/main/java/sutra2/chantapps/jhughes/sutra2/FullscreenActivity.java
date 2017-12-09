@@ -199,7 +199,7 @@ public class FullscreenActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return 5;
+            return sutraList.all().size();
         }
     }
 }

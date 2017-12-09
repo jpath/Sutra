@@ -66,7 +66,6 @@ public class ScreenSlidePageFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater
                 .inflate(R.layout.fragment_screen_slide_page, container, false);
 
-        // Set the title view to show the page number.
         ((TextView) rootView.findViewById(R.id.sutra)).setText(p);
 
         return rootView;
