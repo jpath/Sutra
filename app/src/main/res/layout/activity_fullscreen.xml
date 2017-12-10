@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:keepScreenOn="true"
-        android:onClick="myToggle" />
+         />
 
 
    <!-- This FrameLayout insets its children based on system windows using
