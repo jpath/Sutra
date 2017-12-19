@@ -23,7 +23,6 @@ final class SutraList {
         return instance;
     }
 
-
     public ArrayList<Sutra> all() {
       return sutras;
     }
@@ -32,5 +31,8 @@ final class SutraList {
       return sutras.get(id);
     }
 
+    protected int chapterStartForChapterNumber(FullscreenActivity context, int padaNum) {
+        return DatabaseAccess.getInstance(context).getChapterStartId(padaNum);
+    }
 
 }

@@ -10,7 +10,6 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -144,7 +143,22 @@ public class FullscreenActivity extends AppCompatActivity {
     * Handles onClick for chapter buttons.
      */
     protected void showChapterStart(View view) {
-        Log.d("buttonpressed", view.toString());
+        int start = 0;
+        switch (view.getId()) {
+            case R.id.pada1button:
+                start = sutraList.chapterStartForChapterNumber(this, 1);
+                break;
+            case R.id.pada2button:
+                start = sutraList.chapterStartForChapterNumber(this, 2);
+                break;
+            case R.id.pada3button:
+                start = sutraList.chapterStartForChapterNumber(this, 3);
+                break;
+            case R.id.pada4button:
+                start = sutraList.chapterStartForChapterNumber(this, 4);
+        }
+        start -= 1;
+        mPager.setCurrentItem(start);
     }
 
     protected void toggle(View view) {
