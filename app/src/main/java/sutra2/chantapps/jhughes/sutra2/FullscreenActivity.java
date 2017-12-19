@@ -124,6 +124,10 @@ public class FullscreenActivity extends AppCompatActivity {
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
         findViewById(R.id.pada1button).setOnTouchListener(mDelayHideTouchListener);
+        findViewById(R.id.pada2button).setOnTouchListener(mDelayHideTouchListener);
+        findViewById(R.id.pada3button).setOnTouchListener(mDelayHideTouchListener);
+        findViewById(R.id.pada4button).setOnTouchListener(mDelayHideTouchListener);
+
     }
 
     @Override
