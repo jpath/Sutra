@@ -88,7 +88,7 @@ public class DatabaseAccess {
    }
 
 
-    public int getChapterStartDbId(int chapterNum) {
+    public int getChapterStartId(int chapterNum) {
         int startId;
         String query;
         this.open();

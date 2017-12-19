@@ -29,5 +29,5 @@
         android:typeface="serif"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:onClick="myToggle" />
+        android:onClick="toggle" />
 </RelativeLayout>

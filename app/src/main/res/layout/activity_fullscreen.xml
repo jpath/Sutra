@@ -45,7 +45,8 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/white"
                 android:text="1"
-                android:id="@+id/pada1button"/>
+                android:id="@+id/pada1button"
+                android:onClick="showChapterStart"/>
 
             <Button
                 style="?android:attr/buttonStyleSmall"
@@ -53,21 +54,24 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/white"
                 android:text="2"
-                android:id="@+id/pada2button" />
+                android:id="@+id/pada2button"
+                android:onClick="showChapterStart"/>
             <Button
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:background="@android:color/white"
                 android:text="3"
-                android:id="@+id/pada3button"/>
+                android:id="@+id/pada3button"
+                android:onClick="showChapterStart"/>
             <Button
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:background="@android:color/white"
                 android:text="4"
-                android:id="@+id/pada4button"/>
+                android:id="@+id/pada4button"
+                android:onClick="showChapterStart"/>
 
 
 

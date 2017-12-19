@@ -10,6 +10,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -135,11 +136,14 @@ public class FullscreenActivity extends AppCompatActivity {
         delayedHide(100);
     }
 
-    /* Cannot call toggle() directly */
-    protected void myToggle(View view){
-        toggle();
+    /*
+    * Handles onClick for chapter buttons.
+     */
+    protected void showChapterStart(View view) {
+        Log.d("buttonpressed", view.toString());
     }
-    private void toggle() {
+
+    protected void toggle(View view) {
         if (mVisible) {
             hide();
         } else {
