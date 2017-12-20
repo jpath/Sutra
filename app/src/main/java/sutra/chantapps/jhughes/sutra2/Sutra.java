@@ -1,4 +1,4 @@
-package sutra2.chantapps.jhughes.sutra2;
+package sutra.chantapps.jhughes.sutra2;
 
 /**
  * Created by jhughes on 03/12/17.

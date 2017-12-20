@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="sutra2.chantapps.jhughes.sutra2.FullscreenActivity">
+    tools:context="sutra.chantapps.jhughes.sutra2.FullscreenActivity">
 
     <!-- Not replacing generated text view as it seems to be required
             for system UI visibility. No apparent way to set those controls on

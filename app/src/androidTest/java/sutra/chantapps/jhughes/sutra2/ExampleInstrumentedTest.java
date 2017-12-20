@@ -1,4 +1,4 @@
-package sutra2.chantapps.jhughes.sutra2;
+package sutra.chantapps.jhughes.sutra2;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
