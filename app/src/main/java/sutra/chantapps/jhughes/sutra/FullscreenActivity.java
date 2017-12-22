@@ -1,4 +1,4 @@
-package sutra.chantapps.jhughes.sutra2;
+package sutra.chantapps.jhughes.sutra;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;

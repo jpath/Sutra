@@ -1,4 +1,4 @@
-package sutra.chantapps.jhughes.sutra2;
+package sutra.chantapps.jhughes.sutra;
 
 import java.util.ArrayList;
 
