@@ -6,4 +6,5 @@
 /build
 /captures
 sutra.db
+app/release
 app/*.apk
