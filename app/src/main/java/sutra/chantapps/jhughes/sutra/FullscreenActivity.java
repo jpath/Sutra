@@ -161,7 +161,7 @@ public class FullscreenActivity extends AppCompatActivity {
         mPager.setCurrentItem(start);
     }
 
-    protected void toggle(View view) {
+    public void toggle(View view) {
         if (mVisible) {
             hide();
         } else {
