@@ -142,7 +142,7 @@ public class FullscreenActivity extends AppCompatActivity {
     /*
     * Handles onClick for chapter buttons.
      */
-    protected void showChapterStart(View view) {
+    public void showChapterStart(View view) {
         int start = 0;
         switch (view.getId()) {
             case R.id.pada1button:
@@ -225,3 +225,4 @@ public class FullscreenActivity extends AppCompatActivity {
         }
     }
 }
+
