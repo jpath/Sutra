@@ -17,7 +17,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/content"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:onClick="toggle">
 
     <TextView
         android:id="@+id/sutra"
@@ -27,6 +28,5 @@
         android:layout_centerInParent="true"
         android:typeface="serif"
         android:textSize="20sp"
-        android:textStyle="bold"
-        android:onClick="toggle" />
+        android:textStyle="bold"/>
 </RelativeLayout>
