@@ -53,7 +53,8 @@
                 android:background="@android:color/white"
                 android:text="2"
                 android:id="@+id/pada2button"
-                android:onClick="showChapterStart"/>
+                android:onClick="showChapterStart"
+                android:layout_margin="10dp"/>
             <Button
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="30dp"
@@ -61,7 +62,8 @@
                 android:background="@android:color/white"
                 android:text="3"
                 android:id="@+id/pada3button"
-                android:onClick="showChapterStart"/>
+                android:onClick="showChapterStart"
+                android:layout_marginRight="10dp"/>
             <Button
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="30dp"
