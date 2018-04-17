@@ -32,51 +32,64 @@
             style="?metaButtonBarStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_gravity="bottom|center_horizontal"
+            android:gravity="center"
             android:orientation="horizontal"
             tools:ignore="UselessParent">
 
             <Button
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="30dp"
-                android:layout_height="wrap_content"
-                android:background="@android:color/white"
-                android:text="1"
                 android:id="@+id/pada1button"
-                android:onClick="showChapterStart"/>
-
-            <Button
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:background="@android:color/white"
-                android:text="2"
+                android:onClick="showChapterStart"
+                android:text="@string/pada1_button" />
+
+            <Button
                 android:id="@+id/pada2button"
-                android:onClick="showChapterStart"
-                android:layout_margin="10dp"/>
-            <Button
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:background="@android:color/white"
-                android:text="3"
-                android:id="@+id/pada3button"
                 android:onClick="showChapterStart"
-                android:layout_marginRight="10dp"/>
-            <Button
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="30dp"
-                android:layout_height="wrap_content"
-                android:background="@android:color/white"
-                android:text="4"
-                android:id="@+id/pada4button"
-                android:onClick="showChapterStart"/>
+                android:text="@string/pada2_button" />
 
+            <Button
+                android:id="@+id/pada3button"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:background="@android:color/white"
+                android:onClick="showChapterStart"
+                android:text="@string/pada3_button" />
+
+            <Button
+                android:id="@+id/pada4button"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:onClick="showChapterStart"
+                android:text="@string/pada4_button" />
 
 
         </LinearLayout>
     </FrameLayout>
 
+    <Switch
+        android:id="@+id/easy-mode-switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:autoText="true"
+        android:checked="false"
+        android:visibility="visible"
+        tools:checked="false"
+        tools:layout_margin="5dp"
+        tools:text="@string/easy_mode_switch" />
 
- </FrameLayout>
+
+</FrameLayout>
