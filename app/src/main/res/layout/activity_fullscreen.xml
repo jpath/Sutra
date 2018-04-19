@@ -78,18 +78,19 @@
 
         </LinearLayout>
     </FrameLayout>
-
-    <Switch
-        android:id="@+id/easy-mode-switch"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:autoText="true"
-        android:checked="false"
-        android:visibility="visible"
-        tools:checked="false"
-        tools:layout_margin="5dp"
-        tools:text="@string/easy_mode_switch" />
-
+        android:layout_gravity="right">
+        <Switch
+            android:id="@+id/easy_mode_switch"
+            android:layout_marginTop="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:checked="false"
+            android:visibility="visible"
+            tools:checked="false"
+            tools:text="@string/easy_mode_switch_text" />
+    </LinearLayout>
 
 </FrameLayout>

@@ -10,8 +10,10 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Switch;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -52,7 +54,7 @@ public class FullscreenActivity extends AppCompatActivity {
     private static final int UI_ANIMATION_DELAY = 300;
     private final Handler mHideHandler = new Handler();
     private View mContentView;
-    //private ViewPager mContentView;
+    private Switch mEasyModeSwitch;
     private final Runnable mHidePart2Runnable = new Runnable() {
         @SuppressLint("InlinedApi")
         @Override
@@ -127,6 +129,13 @@ public class FullscreenActivity extends AppCompatActivity {
         findViewById(R.id.pada3button).setOnTouchListener(mDelayHideTouchListener);
         findViewById(R.id.pada4button).setOnTouchListener(mDelayHideTouchListener);
 
+        mEasyModeSwitch = (Switch) findViewById(R.id.easy_mode_switch);
+        mEasyModeSwitch.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Log.d("SWITCH ONCLICKLISTENER", "Someone Hit The Switch");
+
+            }
+        });
     }
 
     @Override

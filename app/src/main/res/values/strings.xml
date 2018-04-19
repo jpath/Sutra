@@ -7,5 +7,5 @@
     <string name="pada2_button">2</string>
     <string name="pada3_button">3</string>
     <string name="pada4_button">4</string>
-    <string name="easy_mode_switch">Easy Mode</string>
+    <string name="easy_mode_switch_text">Easy Mode</string>
 </resources>
