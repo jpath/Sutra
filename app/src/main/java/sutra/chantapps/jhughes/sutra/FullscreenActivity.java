@@ -206,6 +206,14 @@ public class FullscreenActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mService != null) {
+            unbindService(mServiceConn);
+        }
+    }
+    
     private void hide() {
         // Hide UI first
         ActionBar actionBar = getSupportActionBar();
