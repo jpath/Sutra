@@ -1,8 +1,13 @@
 package sutra.chantapps.jhughes.sutra;
 
 import android.annotation.SuppressLint;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -14,6 +19,8 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Switch;
+
+import com.android.vending.billing.IInAppBillingService;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -106,6 +113,21 @@ public class FullscreenActivity extends AppCompatActivity {
         }
     };
 
+    IInAppBillingService mService;
+
+    ServiceConnection mServiceConn = new ServiceConnection() {
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            mService = null;
+        }
+
+        @Override
+        public void onServiceConnected(ComponentName name,
+                                       IBinder service) {
+            mService = IInAppBillingService.Stub.asInterface(service);
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Get the list of sutras
@@ -115,6 +137,12 @@ public class FullscreenActivity extends AppCompatActivity {
         mVisible = true;
         mControlsView = findViewById(R.id.fullscreen_content_controls);
         mContentView = findViewById(R.id.fullscreen_content);
+
+        Intent serviceIntent =
+                new Intent("com.android.vending.billing.InAppBillingService.BIND");
+        serviceIntent.setPackage("com.android.vending");
+        bindService(serviceIntent, mServiceConn, Context.BIND_AUTO_CREATE);
+
 
         // Instantiate a ViewPager and a PagerAdapter.
         mPager= (ViewPager) findViewById(R.id.pager);
